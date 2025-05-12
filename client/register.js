@@ -4,8 +4,12 @@ document.getElementById('register-form').addEventListener('submit', async functi
   const username = document.getElementById('reg-username').value.trim();
   const password = document.getElementById('reg-password').value;
 
+  const API_BASE = location.hostname === 'localhost'
+  ? 'http://localhost:5000'
+  : 'https://chat-backend-0qmm.onrender.com';
+
   try {
-    const response = await fetch('https://chat-backend-0qmm.onrender.com/api/register', {
+    const response = await fetch(API_BASE + '/api/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password })

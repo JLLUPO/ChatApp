@@ -4,8 +4,12 @@ document.getElementById('login-form').addEventListener('submit', async function 
   const username = document.getElementById('username').value.trim();
   const password = document.getElementById('password').value;
 
+  const API_BASE = location.hostname === 'localhost'
+  ? 'http://localhost:5000'
+  : 'https://chat-backend-0qmm.onrender.com';
+
   try {
-    const response = await fetch('https://chat-backend-0qmm.onrender.com/api/login', {
+    const response = await fetch(API_BASE + '/api/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password })
