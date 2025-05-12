@@ -9,7 +9,7 @@
 
   // Verify token with backend
   try {
-    const response = await fetch('http://localhost:5000/api/chat/protected', {
+    const response = await fetch('https://chat-backend-0qmm.onrender.com/api/chat/protected', {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -31,7 +31,7 @@
 
 // Chat setup separated from auth
 function initializeChat(username) {
-  const socket = io('http://localhost:5000');
+  const socket = io('https://chat-backend-0qmm.onrender.com');
 
   const messages = document.getElementById('chat-messages');
   const chatInput = document.getElementById('chat-input');
