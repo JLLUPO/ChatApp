@@ -99,3 +99,9 @@ function initializeChat(username) {
     messages.scrollTop = messages.scrollHeight;
   }
 }
+
+document.getElementById('logout-btn').addEventListener('click', () => {
+  localStorage.removeItem('token');
+  localStorage.removeItem('username');
+  window.location.href = 'login.html';
+});
