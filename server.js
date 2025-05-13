@@ -32,8 +32,16 @@ mongoose.connect(process.env.MONGO_URI)
 app.use('/api', require('./routes/auth'));
 
 // Socket.IO chat
+const users = new Map();
+
 io.on('connection', async (socket) => {
-  console.log('User connected');
+  console.log('User connected', socket.id);
+
+  socket.on('register-user', (username) => {
+    users.set(username, socket.id);
+    socket.username = username; // store on socket
+    console.log(`User registered: ${username}`);
+  })
 
   // Send chat history to new connection
   try {
@@ -46,9 +54,9 @@ io.on('connection', async (socket) => {
   // On new message
   socket.on('chat message', async (msg) => {
     const messageData = {
-      user: msg.user,
+      sender: msg.user,
       text: msg.text,
-    };
+    };  
 
     // Save message to DB
     try {
