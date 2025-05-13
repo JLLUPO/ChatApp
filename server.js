@@ -5,8 +5,10 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const socketIo = require('socket.io');
 const chatRoutes = require('./routes/chat');
+const userRoutes = require('./routes/users');
+const authRoutes = require('./routes/auth');
+const messageRoutes = require('./routes/messages');
 const Message = require('./models/Message');
-
 
 const app = express();
 const server = http.createServer(app); 
@@ -21,7 +23,7 @@ const io = socketIo(server, {
 app.use(cors());
 app.use(express.json());
 app.use(express.static('client'));
-app.use('/api/chat', chatRoutes);
+
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
@@ -29,45 +31,50 @@ mongoose.connect(process.env.MONGO_URI)
   .catch(err => console.error(err));
 
 // Routes
-app.use('/api', require('./routes/auth'));
+app.use('/api', authRoutes);
+app.use('/api/chat', chatRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/messages', messageRoutes);
 
+const onlineUsers = {}; // username => socket.id
 // Socket.IO chat
-const users = new Map();
-
 io.on('connection', async (socket) => {
   console.log('User connected', socket.id);
 
-  socket.on('register-user', (username) => {
-    users.set(username, socket.id);
-    socket.username = username; // store on socket
-    console.log(`User registered: ${username}`);
-  })
+  socket.on('init-session', (username) => {
+    socket.username = username;
+    onlineUsers[username] = socket.id;
+  });
 
-  // Send chat history to new connection
-  try {
-    const history = await Message.find().sort({ timestamp: 1 }).limit(50);
-    socket.emit('chat history', history);
-  } catch (err) {
-    console.error('Error fetching history:', err);
-  }
 
   // On new message
-  socket.on('chat message', async (msg) => {
-    const messageData = {
-      sender: msg.user,
-      text: msg.text,
-    };  
+  socket.on('direct message', async (msg) => {
+    const { from, to, text } = msg;
+
+    const savedMessage = await Message.create({ sender: from, recipient: to, text });
 
     // Save message to DB
-    try {
-      const savedMessage = await Message.create(messageData);
-      io.emit('chat message', savedMessage); // Broadcast saved msg
-    } catch (err) {
-      console.error('Error saving message:', err);
+    // try {
+    //   const savedMessage = await Message.create({ sender: from, recipient: to, text });
+    //   // io.emit('direct message', savedMessage); // Broadcast saved msg
+    // } catch (err) {
+    //   console.error('Error saving message:', err);
+    // }
+
+    const recipientSocketId = onlineUsers[to];
+    if (recipientSocketId) {
+      io.to(recipientSocketId).emit('direct message', savedMessage);
     }
+
+    socket.emit('direct message', savedMessage);
   }); 
 
+  
+
   socket.on('disconnect', () => {
+    if (socket.username) {
+      delete onlineUsers[socket.username];
+    }
     console.log('User disconnected');
   });
 });

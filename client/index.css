@@ -25,7 +25,6 @@ body {
   background: #007bff;
   color: white;
   padding: 1rem;
-  text-align: center;
   font-size: 1.25rem;
 }
 
@@ -121,4 +120,10 @@ body {
 
 #logout-btn:hover {
   background: #62666a;
+}
+
+#recipient-select {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 2px;
 }

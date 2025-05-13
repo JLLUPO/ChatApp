@@ -36,10 +36,51 @@
 // Chat setup separated from auth
 function initializeChat(username) {
   const socket = io(API_BASE);
+  socket.emit('init-session', username);
 
   const messages = document.getElementById('chat-messages');
   const chatInput = document.getElementById('chat-input');
   const sendButton = document.querySelector('.chat-input button');
+  const recipientSelect = document.getElementById('recipient-select')
+
+  let selectedRecipient = ''
+
+ // Fetch all users for the dropdown
+  fetch('/api/users', {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    }
+  })
+  .then(res => res.json())
+  .then(users => {
+    users.forEach(user => {
+      if (user.username !== username) {
+        const option = document.createElement('option');
+        option.value = user.username;
+        option.textContent = user.username;
+        recipientSelect.appendChild(option);
+      }
+    }); 
+  });
+
+  // Handle recipient change
+  recipientSelect.addEventListener('change', async (e) => {
+    selectedRecipient = e.target.value;
+    messages.innerHTML = ''; // Clear messages
+
+    if (selectedRecipient) {
+      const res = await fetch(`/api/messages/${selectedRecipient}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+      const history = await res.json();
+
+      history.forEach(msg => {
+        displayMessage(msg)
+      });
+    }
+  });
 
   sendButton.addEventListener('click', sendMessage);
   chatInput.addEventListener('keypress', e => {
@@ -50,25 +91,35 @@ function initializeChat(username) {
     const text = chatInput.value.trim();
     if (text) {
       const msg = {
-        user: username,
+        sender: username,
+        recipient: selectedRecipient,
         text,
       };
-      socket.emit('chat message', msg);
+      socket.emit('direct message', msg);
       chatInput.value = '';
     }
   }
 
-  // Receive chat history
-  socket.on('chat history', (messagesArray) => {
-    messagesArray.forEach(msg => {
+  // // Receive chat history
+  // socket.on('chat history', (messagesArray) => {
+  //   messagesArray.forEach(msg => {
+  //     displayMessage(msg);
+  //   });
+  // });
+
+
+  // Receiving a message
+  socket.on('private message', (msg) => {
+    // Only show if the message is for the currently selected recipient
+    if (msg.sender === selectedRecipient || msg.sender === username) {
       displayMessage(msg);
-    });
+    }
   });
 
-  // Receive new messages
-  socket.on('chat message', msg => {
-    displayMessage(msg);
-  });
+  // // Receive new messages
+  // socket.on('chat message', msg => {
+  //   displayMessage(msg);
+  // });
 
   // Display message to chat
   function displayMessage(msg) {
