@@ -41,7 +41,7 @@ const onlineUsers = {}; // username => socket.id
 io.on('connection', async (socket) => {
   console.log('User connected', socket.id);
 
-  socket.on('init-session', (username) => {
+  socket.on('init', async (username) => {
     socket.username = username;
     onlineUsers[username] = socket.id;
   });
@@ -49,27 +49,32 @@ io.on('connection', async (socket) => {
 
   // On new message
   socket.on('direct message', async (msg) => {
-    const { from, to, text } = msg;
+    const { sender, recipient, text } = msg;
 
-    const savedMessage = await Message.create({ sender: from, recipient: to, text });
+    if (!sender || !recipient || !text) {
+      console.error('Invalid message:', msg);
+      return;
+    }
 
-    // Save message to DB
-    // try {
-    //   const savedMessage = await Message.create({ sender: from, recipient: to, text });
-    //   // io.emit('direct message', savedMessage); // Broadcast saved msg
-    // } catch (err) {
-    //   console.error('Error saving message:', err);
-    // }
+    try {
+      console.log('Saving message:', { sender, recipient, text });
+      const savedMessage = await Message.create({
+        sender,
+        recipient,
+        text
+      });
 
-    const recipientSocketId = onlineUsers[to];
+    const recipientSocketId = onlineUsers[recipient];
     if (recipientSocketId) {
+      console.log('online:', onlineUsers[recipient]);
       io.to(recipientSocketId).emit('direct message', savedMessage);
     }
 
     socket.emit('direct message', savedMessage);
+  } catch (err) {
+    console.error('Failed to save message:', err);
+  }
   }); 
-
-  
 
   socket.on('disconnect', () => {
     if (socket.username) {

@@ -36,7 +36,7 @@
 // Chat setup separated from auth
 function initializeChat(username) {
   const socket = io(API_BASE);
-  socket.emit('init-session', username);
+  socket.emit('init', username);
 
   const messages = document.getElementById('chat-messages');
   const chatInput = document.getElementById('chat-input');
@@ -67,7 +67,7 @@ function initializeChat(username) {
   recipientSelect.addEventListener('change', async (e) => {
     selectedRecipient = e.target.value;
     messages.innerHTML = ''; // Clear messages
-
+    
     if (selectedRecipient) {
       const res = await fetch(`/api/messages/${selectedRecipient}`, {
         headers: {
@@ -75,6 +75,7 @@ function initializeChat(username) {
         }
       });
       const history = await res.json();
+      console.log('History:', history);
 
       history.forEach(msg => {
         displayMessage(msg)
@@ -100,26 +101,13 @@ function initializeChat(username) {
     }
   }
 
-  // // Receive chat history
-  // socket.on('chat history', (messagesArray) => {
-  //   messagesArray.forEach(msg => {
-  //     displayMessage(msg);
-  //   });
-  // });
-
-
   // Receiving a message
-  socket.on('private message', (msg) => {
+  socket.on('direct message', (msg) => {
     // Only show if the message is for the currently selected recipient
     if (msg.sender === selectedRecipient || msg.sender === username) {
       displayMessage(msg);
     }
   });
-
-  // // Receive new messages
-  // socket.on('chat message', msg => {
-  //   displayMessage(msg);
-  // });
 
   // Display message to chat
   function displayMessage(msg) {
@@ -132,17 +120,12 @@ function initializeChat(username) {
     
     bubbleDiv.textContent = msg.text;
 
-    if (msg.user === username) {
+    if (msg.sender === username) {
       li.classList.add('message-right');
       bubbleDiv.classList.add('bubble-right');
     } else {
-      const nameDiv = document.createElement('div');
-      nameDiv.classList.add('username');
-      nameDiv.textContent = msg.user;
       li.classList.add('message-left');
       bubbleDiv.classList.add('bubble-left');
-
-      li.appendChild(nameDiv);
     }
     
     li.appendChild(bubbleDiv);

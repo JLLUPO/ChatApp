@@ -52,12 +52,6 @@ body {
   text-align: right;
 }
 
-.username {
-  font-size: 0.8rem;
-  color: #555;
-  margin-bottom: 4px;
-}
-
 .bubble {
   padding: 10px 14px;
   border-radius: 16px;

@@ -17,6 +17,7 @@ router.get('/:recipient', authMiddleware, async (req, res) => {
 
     res.json(messages);
   } catch (err) {
+    console.error(err);
     res.status(500).json({ error: 'Failed to fetch messages' });
   }
 });
