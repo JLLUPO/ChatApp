@@ -51,7 +51,7 @@ router.post('/login', async (req, res) => {
       { expiresIn: '2h' }
     );
 
-    res.json({ token, username: user.username });
+    res.json({ token, username: user.username, encryptionKey: process.env.MESSAGE_SECRET });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Server error' });

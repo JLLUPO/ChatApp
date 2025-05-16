@@ -20,6 +20,7 @@ document.getElementById('login-form').addEventListener('submit', async function 
     if (response.ok) {
       localStorage.setItem('token', data.token);
       localStorage.setItem('username', data.username);
+      sessionStorage.setItem('encryptionKey', data.encryptionKey); // cleared on tab close
       window.location.href = 'index.html'; // Go to chat page
     } else {
       alert(data.message || 'Login failed');

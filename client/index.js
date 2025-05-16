@@ -2,6 +2,7 @@
   ? 'http://localhost:5000'
   : 'https://chat-backend-0qmm.onrender.com';
 
+
 (async () => {
   const token = localStorage.getItem('token');
   const username = localStorage.getItem('username');
@@ -78,6 +79,7 @@ function initializeChat(username) {
       console.log('History:', history);
 
       history.forEach(msg => {
+        msg.text = decryptMessage(msg.text);
         displayMessage(msg)
       });
     }
@@ -94,7 +96,7 @@ function initializeChat(username) {
       const msg = {
         sender: username,
         recipient: selectedRecipient,
-        text,
+        text: encryptMessage(text)
       };
       socket.emit('direct message', msg);
       chatInput.value = '';
@@ -103,11 +105,14 @@ function initializeChat(username) {
 
   // Receiving a message
   socket.on('direct message', (msg) => {
-    // Only show if the message is for the currently selected recipient
-    if (msg.sender === selectedRecipient || msg.sender === username) {
-      displayMessage(msg);
-    }
-  });
+  if (
+    (msg.sender === selectedRecipient && msg.recipient === username) ||
+    (msg.sender === username && msg.recipient === selectedRecipient)
+  ) {
+    msg.text = decryptMessage(msg.text);
+    displayMessage(msg);
+  }
+});
 
   // Display message to chat
   function displayMessage(msg) {
@@ -137,5 +142,21 @@ function initializeChat(username) {
 document.getElementById('logout-btn').addEventListener('click', () => {
   localStorage.removeItem('token');
   localStorage.removeItem('username');
+  sessionStorage.removeItem('encryptionKey');
   window.location.href = 'login.html';
 });
+
+function getKey() {
+  return sessionStorage.getItem('encryptionKey');
+}
+
+function encryptMessage(text) {
+  const key = getKey();
+  return CryptoJS.AES.encrypt(text, key).toString();
+}
+
+function decryptMessage(ciphertext) {
+  const key = getKey();
+  const bytes = CryptoJS.AES.decrypt(ciphertext, key);
+  return bytes.toString(CryptoJS.enc.Utf8);
+}
