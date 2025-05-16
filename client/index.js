@@ -328,7 +328,12 @@ document.getElementById('logoutBtn').addEventListener('click', () => {
 });
 
 function getKey() {
-  return sessionStorage.getItem('encryptionKey');
+  const key = sessionStorage.getItem('encryptionKey');
+  if (!key) {
+    alert("Missing encryption key. Please log in again.");
+    window.location.href = "login.html";
+  }
+  return key;
 }
 
 function encryptMessage(text) {
