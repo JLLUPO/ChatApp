@@ -1,0 +1,256 @@
+.group-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Header */
+.group-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.header-title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #2ecc71;
+}
+
+.header-title i {
+    font-size: 1.5rem;
+}
+
+.header-title h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.close-group {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #6c757d;
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+}
+
+.close-group:hover {
+    background: #e9ecef;
+}
+
+/* Toolbar */
+.group-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: #fff;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.search-bar {
+    flex: 1;
+    position: relative;
+    margin-right: 1rem;
+}
+
+.search-bar i {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.5rem;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    font-size: 0.95rem;
+}
+
+.search-bar input:focus {
+    outline: none;
+    border-color: #2ecc71;
+}
+
+.filter-options {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.filter-btn {
+    background: none;
+    border: 1px solid #dee2e6;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    color: #6c757d;
+    cursor: pointer;
+}
+
+.filter-btn.active {
+    background: #2ecc71;
+    color: white;
+    border-color: #2ecc71;
+}
+
+/* Content */
+.group-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+.members-section {
+    margin-bottom: 2rem;
+}
+
+.members-section h3 {
+    color: #2c3e50;
+    margin: 0 0 1rem 0;
+    font-size: 1.1rem;
+}
+
+.members-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+/* Member Item */
+.member-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 6px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.member-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.member-avatar {
+    position: relative;
+}
+
+.member-avatar img {
+    width: 48px;
+    height: 48px;
+    border-radius: 24px;
+    object-fit: cover;
+}
+
+.status-indicator {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid white;
+}
+
+.member-item[data-status="online"] .status-indicator {
+    background: #2ecc71;
+}
+
+.member-item[data-status="offline"] .status-indicator {
+    background: #95a5a6;
+}
+
+.member-details {
+    flex: 1;
+}
+
+.member-name {
+    font-weight: 500;
+    color: #2c3e50;
+    margin-bottom: 0.25rem;
+}
+
+.member-role {
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+
+.member-actions {
+    display: flex;
+    gap: 0.5rem;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.member-item:hover .member-actions {
+    opacity: 1;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    color: #6c757d;
+    padding: 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.action-btn:hover {
+    background: #e9ecef;
+    color: #2c3e50;
+}
+
+.action-btn[title="Message"]:hover {
+    color: #2ecc71;
+}
+
+.action-btn[title="Video Call"]:hover {
+    color: #3498db;
+}
+
+/* Scrollbar */
+.group-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.group-content::-webkit-scrollbar-track {
+    background: #f1f3f5;
+}
+
+.group-content::-webkit-scrollbar-thumb {
+    background: #ced4da;
+    border-radius: 3px;
+}
+
+.group-content::-webkit-scrollbar-thumb:hover {
+    background: #adb5bd;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.member-item {
+    animation: fadeIn 0.3s ease;
+}

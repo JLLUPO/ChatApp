@@ -1,0 +1,59 @@
+.question-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.question-bar label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    margin-right: 15px;
+}
+
+.question-bar input[type="text"] {
+    flex: 1;
+    height: 36px;
+    padding: 0 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+.question-bar input[type="text"]:focus {
+    outline: none;
+    border-color: #4d4f63;
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+.question-bar button {
+    height: 36px;
+    padding: 0 20px;
+    background-color: #4d4f63;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.question-bar button:hover {
+    background-color: #357abd;
+}
+
+/* Adjust existing container to account for question bar */
+.container {
+    padding-top: 60px !important;
+}

@@ -1,0 +1,127 @@
+<div class="files-container">
+    <div class="files-header">
+        <h2><i class="fas fa-folder-open"></i> Project Files</h2>
+        <button class="close-files">×</button>
+    </div>
+
+    <div class="files-search">
+        <div class="search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search files...">
+        </div>
+        <div class="view-options">
+            <button class="view-btn active" data-view="list">
+                <i class="fas fa-list"></i>
+            </button>
+            <button class="view-btn" data-view="grid">
+                <i class="fas fa-th-large"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="files-content">
+        <div class="files-list">
+            <!-- Document files -->
+            <div class="file-item" data-type="document">
+                <div class="file-icon">
+                    <i class="fas fa-file-word"></i>
+                </div>
+                <div class="file-details">
+                    <div class="file-name">Project Proposal.docx</div>
+                    <div class="file-meta">
+                        <span class="file-date">Modified: Mar 24, 2025</span>
+                        <select class="version-select">
+                            <option>v3 (Current)</option>
+                            <option>v2 - Mar 23</option>
+                            <option>v1 - Mar 22</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="file-actions">
+                    <button class="action-btn" title="Download">
+                        <i class="fas fa-download"></i>
+                    </button>
+                    <button class="action-btn" title="Share">
+                        <i class="fas fa-share-alt"></i>
+                    </button>
+                    <button class="action-btn" title="Delete">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- PDF file -->
+            <div class="file-item" data-type="pdf">
+                <div class="file-icon">
+                    <i class="fas fa-file-pdf"></i>
+                </div>
+                <div class="file-details">
+                    <div class="file-name">Research Notes.pdf</div>
+                    <div class="file-meta">
+                        <span class="file-date">Modified: Mar 23, 2025</span>
+                        <select class="version-select">
+                            <option>v2 (Current)</option>
+                            <option>v1 - Mar 22</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="file-actions">
+                    <button class="action-btn" title="Download">
+                        <i class="fas fa-download"></i>
+                    </button>
+                    <button class="action-btn" title="Share">
+                        <i class="fas fa-share-alt"></i>
+                    </button>
+                    <button class="action-btn" title="Delete">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Code file -->
+            <div class="file-item" data-type="code">
+                <div class="file-icon">
+                    <i class="fas fa-file-code"></i>
+                </div>
+                <div class="file-details">
+                    <div class="file-name">analysis.py</div>
+                    <div class="file-meta">
+                        <span class="file-date">Modified: Mar 25, 2025</span>
+                        <select class="version-select">
+                            <option>v1 (Current)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="file-actions">
+                    <button class="action-btn" title="Download">
+                        <i class="fas fa-download"></i>
+                    </button>
+                    <button class="action-btn" title="Share">
+                        <i class="fas fa-share-alt"></i>
+                    </button>
+                    <button class="action-btn" title="Delete">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="upload-section">
+        <div class="upload-progress" style="display: none;">
+            <div class="progress-bar">
+                <div class="progress" style="width: 0%"></div>
+            </div>
+            <div class="progress-text">0%</div>
+        </div>
+        <div class="upload-controls">
+            <button class="upload-btn">
+                <i class="fas fa-cloud-upload-alt"></i> Upload File
+            </button>
+            <input type="file" id="fileInput" style="display: none;" multiple>
+            <div class="upload-info">
+                Drag & drop files here or click to upload
+            </div>
+        </div>
+    </div>
+</div>

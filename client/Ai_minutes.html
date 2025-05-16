@@ -1,0 +1,95 @@
+<div class="ai-assistant-container">
+    <div class="ai-header">
+        <div class="ai-title">
+            <i class="fas fa-robot"></i>
+            <h2>AI Assistant</h2>
+        </div>
+        <button class="close-ai">×</button>
+    </div>
+
+    <div class="ai-toolbar">
+        <div class="ai-modes">
+            <button class="mode-btn active" data-mode="chat">
+                <i class="fas fa-comments"></i> Chat
+            </button>
+            <button class="mode-btn" data-mode="summarize">
+                <i class="fas fa-file-alt"></i> Summarize
+            </button>
+            <button class="mode-btn" data-mode="analyze">
+                <i class="fas fa-chart-bar"></i> Analyze
+            </button>
+        </div>
+        <button class="clear-chat">
+            <i class="fas fa-trash"></i>
+        </button>
+    </div>
+
+    <div class="ai-chat-area">
+        <div class="message ai-message">
+            <div class="message-avatar">
+                <i class="fas fa-robot"></i>
+            </div>
+            <div class="message-content">
+                <div class="message-text">Hello! I'm your AI assistant. How can I help you today?</div>
+                <div class="message-time">11:45 AM</div>
+            </div>
+        </div>
+
+        <div class="message user-message">
+            <div class="message-content">
+                <div class="message-text">Can you summarize today's meeting notes?</div>
+                <div class="message-time">11:46 AM</div>
+            </div>
+            <div class="message-avatar">
+                <i class="fas fa-user"></i>
+            </div>
+        </div>
+
+        <div class="message ai-message">
+            <div class="message-avatar">
+                <i class="fas fa-robot"></i>
+            </div>
+            <div class="message-content">
+                <div class="message-text">Here's a summary of today's meeting:
+                    <ul>
+                        <li>Project timeline updated: launch scheduled for May 2025</li>
+                        <li>New features prioritized: AI integration and real-time collaboration</li>
+                        <li>Team assignments distributed for upcoming sprint</li>
+                        <li>Next review meeting scheduled for April 5th</li>
+                    </ul>
+                </div>
+                <div class="message-time">11:46 AM</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="ai-input-area">
+        <div class="input-wrapper">
+            <input type="text" placeholder="Type your message..." id="aiMessageInput">
+            <div class="input-actions">
+                <button class="action-btn" title="Upload File">
+                    <i class="fas fa-paperclip"></i>
+                </button>
+                <button class="action-btn" title="Record Voice">
+                    <i class="fas fa-microphone"></i>
+                </button>
+            </div>
+        </div>
+        <button class="send-btn">
+            <i class="fas fa-paper-plane"></i>
+        </button>
+    </div>
+
+    <!-- Context Menu -->
+    <div class="context-menu" style="display: none;">
+        <button class="menu-item">
+            <i class="fas fa-copy"></i> Copy
+        </button>
+        <button class="menu-item">
+            <i class="fas fa-share"></i> Share
+        </button>
+        <button class="menu-item">
+            <i class="fas fa-save"></i> Save
+        </button>
+    </div>
+</div>

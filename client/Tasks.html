@@ -1,0 +1,93 @@
+<div class="tasks-container">
+    <div class="tasks-header">
+        <h2>Team Tasks</h2>
+        <button class="close-tasks">×</button>
+    </div>
+
+    <div class="kanban-board">
+        <!-- To Do Column -->
+        <div class="kanban-column" id="todo">
+            <div class="column-header">
+                <h3>To Do</h3>
+                <span class="task-count">2</span>
+            </div>
+            <div class="task-list" data-column="todo">
+                <div class="task-card" draggable="true" data-task-id="1">
+                    <div class="task-content">
+                        <h4>Research Paper Review</h4>
+                        <p class="task-meta">Jay • 3/26/25</p>
+                        <div class="task-priority high">High Priority</div>
+                    </div>
+                </div>
+                <div class="task-card" draggable="true" data-task-id="2">
+                    <div class="task-content">
+                        <h4>Project Planning</h4>
+                        <p class="task-meta">Sarah • 3/27/25</p>
+                        <div class="task-priority medium">Medium Priority</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- In Progress Column -->
+        <div class="kanban-column" id="inprogress">
+            <div class="column-header">
+                <h3>In Progress</h3>
+                <span class="task-count">1</span>
+            </div>
+            <div class="task-list" data-column="inprogress">
+                <div class="task-card" draggable="true" data-task-id="3">
+                    <div class="task-content">
+                        <h4>Data Analysis</h4>
+                        <p class="task-meta">Mike • 3/25/25</p>
+                        <div class="task-priority high">High Priority</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Done Column -->
+        <div class="kanban-column" id="done">
+            <div class="column-header">
+                <h3>Done</h3>
+                <span class="task-count">1</span>
+            </div>
+            <div class="task-list" data-column="done">
+                <div class="task-card" draggable="true" data-task-id="4">
+                    <div class="task-content">
+                        <h4>Initial Setup</h4>
+                        <p class="task-meta">Alex • 3/24/25</p>
+                        <div class="task-priority low">Low Priority</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Task Form -->
+    <div class="add-task-section">
+        <button id="showAddTaskForm" class="add-task-btn">
+            <i class="fas fa-plus"></i> Add Task
+        </button>
+        <div class="add-task-form" style="display: none;">
+            <input type="text" id="taskName" placeholder="Task name">
+            <select id="taskAssignee">
+                <option value="">Select assignee...</option>
+                <option value="jay">Jay</option>
+                <option value="sarah">Sarah</option>
+                <option value="mike">Mike</option>
+                <option value="alex">Alex</option>
+            </select>
+            <select id="taskPriority">
+                <option value="">Select priority...</option>
+                <option value="high">High Priority</option>
+                <option value="medium">Medium Priority</option>
+                <option value="low">Low Priority</option>
+            </select>
+            <div class="form-actions">
+                <button id="cancelAddTask" class="cancel-btn">Cancel</button>
+                <button id="submitAddTask" class="submit-btn">Add Task</button>
+            </div>
+        </div>
+    </div>
+</div>

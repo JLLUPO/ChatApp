@@ -1,0 +1,150 @@
+<div class="bookmarks-container">
+    <div class="bookmarks-header">
+        <div class="header-title">
+            <i class="fas fa-bookmark"></i>
+            <h2>Bookmarks</h2>
+        </div>
+        <button class="close-bookmarks">×</button>
+    </div>
+
+    <div class="bookmarks-toolbar">
+        <div class="search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search bookmarks...">
+        </div>
+        <div class="view-options">
+            <button class="view-btn active" data-view="list">
+                <i class="fas fa-list"></i>
+            </button>
+            <button class="view-btn" data-view="grid">
+                <i class="fas fa-th-large"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="bookmarks-content">
+        <div class="bookmarks-section">
+            <h3>Academic</h3>
+            <div class="bookmarks-list">
+                <a href="#" class="bookmark-item">
+                    <div class="bookmark-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="bookmark-details">
+                        <div class="bookmark-title">Learning Management System</div>
+                        <div class="bookmark-url">https://lms.university.edu</div>
+                    </div>
+                    <div class="bookmark-actions">
+                        <button class="action-btn" title="Edit">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-btn" title="Delete">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </a>
+                <a href="#" class="bookmark-item">
+                    <div class="bookmark-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="bookmark-details">
+                        <div class="bookmark-title">Digital Library</div>
+                        <div class="bookmark-url">https://library.university.edu</div>
+                    </div>
+                    <div class="bookmark-actions">
+                        <button class="action-btn" title="Edit">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-btn" title="Delete">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="bookmarks-section">
+            <h3>Research</h3>
+            <div class="bookmarks-list">
+                <a href="#" class="bookmark-item">
+                    <div class="bookmark-icon">
+                        <i class="fab fa-google-drive"></i>
+                    </div>
+                    <div class="bookmark-details">
+                        <div class="bookmark-title">Research Drive</div>
+                        <div class="bookmark-url">https://drive.google.com</div>
+                    </div>
+                    <div class="bookmark-actions">
+                        <button class="action-btn" title="Edit">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-btn" title="Delete">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </a>
+                <a href="#" class="bookmark-item">
+                    <div class="bookmark-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <div class="bookmark-details">
+                        <div class="bookmark-title">Research Portal</div>
+                        <div class="bookmark-url">https://research.university.edu</div>
+                    </div>
+                    <div class="bookmark-actions">
+                        <button class="action-btn" title="Edit">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-btn" title="Delete">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="add-bookmark-section">
+        <button class="add-bookmark-btn">
+            <i class="fas fa-plus"></i> Add Bookmark
+        </button>
+    </div>
+</div>
+
+<!-- Add Bookmark Modal -->
+<div class="bookmark-modal" style="display: none;">
+    <div class="bookmark-modal-content">
+        <h3>Add New Bookmark</h3>
+        <form id="addBookmarkForm">
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text" id="bookmarkTitle" required>
+            </div>
+            <div class="form-group">
+                <label>URL</label>
+                <input type="url" id="bookmarkUrl" required>
+            </div>
+            <div class="form-group">
+                <label>Category</label>
+                <select id="bookmarkCategory">
+                    <option value="academic">Academic</option>
+                    <option value="research">Research</option>
+                    <option value="personal">Personal</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Icon</label>
+                <select id="bookmarkIcon">
+                    <option value="fa-graduation-cap">Academic</option>
+                    <option value="fa-book">Book</option>
+                    <option value="fa-flask">Research</option>
+                    <option value="fa-link">Link</option>
+                </select>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="cancel-btn">Cancel</button>
+                <button type="submit" class="submit-btn">Add Bookmark</button>
+            </div>
+        </form>
+    </div>
+</div>

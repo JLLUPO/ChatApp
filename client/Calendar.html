@@ -1,0 +1,135 @@
+<div class="calendar-container">
+    <div class="calendar-header">
+        <div class="calendar-nav">
+            <button class="nav-btn prev-month">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <h2>March 2025</h2>
+            <button class="nav-btn next-month">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+        <button class="close-calendar">×</button>
+    </div>
+
+    <div class="calendar-toolbar">
+        <div class="view-options">
+            <button class="view-btn active" data-view="month">Month</button>
+            <button class="view-btn" data-view="week">Week</button>
+            <button class="view-btn" data-view="day">Day</button>
+        </div>
+        <button class="add-event-btn">
+            <i class="fas fa-plus"></i> Add Event
+        </button>
+    </div>
+
+    <div class="calendar-grid">
+        <div class="weekdays">
+            <div>Sun</div>
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div>Sat</div>
+        </div>
+        <div class="days">
+            <!-- Previous Month -->
+            <div class="day other-month">25</div>
+            <div class="day other-month">26</div>
+            <div class="day other-month">27</div>
+            <div class="day other-month">28</div>
+
+            <!-- Current Month -->
+            <div class="day">1</div>
+            <div class="day">2</div>
+            <div class="day">3</div>
+            <div class="day">4</div>
+            <div class="day">5</div>
+            <div class="day">6</div>
+            <div class="day">7</div>
+            <div class="day">8</div>
+            <div class="day">9</div>
+            <div class="day">10</div>
+            <div class="day">11</div>
+            <div class="day">12</div>
+            <div class="day">13</div>
+            <div class="day">14</div>
+            <div class="day">15</div>
+            <div class="day">16</div>
+            <div class="day">17</div>
+            <div class="day">18</div>
+            <div class="day">19</div>
+            <div class="day">20</div>
+            <div class="day">21</div>
+            <div class="day">22</div>
+            <div class="day">23</div>
+            <div class="day">24</div>
+            <div class="day">25</div>
+            <div class="day has-events current">26
+                <div class="event academic">
+                    <span class="event-time">10:00 AM</span>
+                    <span class="event-title">Research Methods Class</span>
+                </div>
+                <div class="event meeting">
+                    <span class="event-time">2:30 PM</span>
+                    <span class="event-title">Group Meeting</span>
+                </div>
+            </div>
+            <div class="day has-events">27
+                <div class="event deadline">
+                    <span class="event-time">11:59 PM</span>
+                    <span class="event-title">Assignment Due</span>
+                </div>
+            </div>
+            <div class="day has-events">28
+                <div class="event academic">
+                    <span class="event-time">9:00 AM</span>
+                    <span class="event-title">Statistics Lecture</span>
+                </div>
+            </div>
+            <div class="day">29</div>
+            <div class="day">30</div>
+            <div class="day">31</div>
+
+            <!-- Next Month -->
+            <div class="day other-month">1</div>
+            <div class="day other-month">2</div>
+            <div class="day other-month">3</div>
+            <div class="day other-month">4</div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Event Modal -->
+<div class="event-modal" style="display: none;">
+    <div class="event-modal-content">
+        <h3>Add New Event</h3>
+        <form id="addEventForm">
+            <div class="form-group">
+                <label>Event Title</label>
+                <input type="text" id="eventTitle" required>
+            </div>
+            <div class="form-group">
+                <label>Date</label>
+                <input type="date" id="eventDate" required>
+            </div>
+            <div class="form-group">
+                <label>Time</label>
+                <input type="time" id="eventTime" required>
+            </div>
+            <div class="form-group">
+                <label>Event Type</label>
+                <select id="eventType">
+                    <option value="academic">Academic</option>
+                    <option value="meeting">Meeting</option>
+                    <option value="deadline">Deadline</option>
+                </select>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="cancel-btn">Cancel</button>
+                <button type="submit" class="submit-btn">Add Event</button>
+            </div>
+        </form>
+    </div>
+</div>

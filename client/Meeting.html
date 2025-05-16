@@ -1,0 +1,182 @@
+<div class="meeting-container">
+    <div class="meeting-header">
+        <div class="header-title">
+            <i class="fas fa-video"></i>
+            <h2>Meetings</h2>
+        </div>
+        <button class="close-meeting">×</button>
+    </div>
+
+    <div class="meeting-tabs">
+        <button class="tab-btn active" data-tab="host">Host Meeting</button>
+        <button class="tab-btn" data-tab="record">Record Meeting</button>
+    </div>
+
+    <div class="meeting-content">
+        <!-- Host Meeting Tab -->
+        <div class="tab-content host-tab active">
+            <div class="host-options">
+                <div class="option-row">
+                    <div class="meeting-id">
+                        <label>Meeting ID:</label>
+                        <input type="text" value="123-456-789" readonly>
+                        <button class="copy-btn" title="Copy">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                    <div class="meeting-password">
+                        <label>Password:</label>
+                        <input type="text" value="abc123" readonly>
+                        <button class="copy-btn" title="Copy">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="option-row">
+                    <div class="meeting-link">
+                        <label>Meeting Link:</label>
+                        <input type="text" value="https://meeting.app/join/123-456-789" readonly>
+                        <button class="copy-btn" title="Copy">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="participants-area">
+                <div class="participants-header">
+                    <h3>Participants (3)</h3>
+                    <div class="controls">
+                        <button class="control-btn" title="Mute All">
+                            <i class="fas fa-microphone-slash"></i>
+                        </button>
+                        <button class="control-btn" title="Hide All Videos">
+                            <i class="fas fa-video-slash"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="participants-grid">
+                    <div class="participant-card host">
+                        <div class="video-placeholder">
+                            <i class="fas fa-user"></i>
+                            <span class="mic-status">
+                                <i class="fas fa-microphone"></i>
+                            </span>
+                        </div>
+                        <div class="participant-info">
+                            <span class="name">You (Host)</span>
+                        </div>
+                    </div>
+                    <div class="participant-card">
+                        <div class="video-placeholder">
+                            <i class="fas fa-user"></i>
+                            <span class="mic-status muted">
+                                <i class="fas fa-microphone-slash"></i>
+                            </span>
+                        </div>
+                        <div class="participant-info">
+                            <span class="name">Alex Chen</span>
+                        </div>
+                    </div>
+                    <div class="participant-card">
+                        <div class="video-placeholder">
+                            <i class="fas fa-user"></i>
+                            <span class="mic-status">
+                                <i class="fas fa-microphone"></i>
+                            </span>
+                        </div>
+                        <div class="participant-info">
+                            <span class="name">Maya Patel</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="meeting-controls">
+                <button class="control-btn" title="Microphone">
+                    <i class="fas fa-microphone"></i>
+                </button>
+                <button class="control-btn" title="Camera">
+                    <i class="fas fa-video"></i>
+                </button>
+                <button class="control-btn" title="Share Screen">
+                    <i class="fas fa-desktop"></i>
+                </button>
+                <button class="control-btn" title="Chat">
+                    <i class="fas fa-comment"></i>
+                </button>
+                <button class="control-btn danger" title="End Meeting">
+                    <i class="fas fa-phone-slash"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Record Meeting Tab -->
+        <div class="tab-content record-tab">
+            <div class="recording-status">
+                <div class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Ready to Record</span>
+                </div>
+                <div class="timer">00:00:00</div>
+            </div>
+
+            <div class="transcription-area">
+                <div class="transcription-header">
+                    <h3>Live Transcription</h3>
+                    <div class="controls">
+                        <button class="control-btn" title="Copy">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                        <button class="control-btn" title="Download">
+                            <i class="fas fa-download"></i>
+                        </button>
+                        <button class="control-btn" title="Clear">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="transcription-content" contenteditable="true">
+                    <div class="transcription-entry">
+                        <span class="timestamp">[12:07:55]</span>
+                        <span class="speaker">Dr. Smith:</span>
+                        <span class="text">Let's begin our discussion about the project timeline.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="meeting-settings">
+                <div class="settings-row">
+                    <label class="setting-label">
+                        <input type="checkbox" checked>
+                        <span>Enable Auto-Transcription</span>
+                    </label>
+                    <label class="setting-label">
+                        <input type="checkbox" checked>
+                        <span>Save to Cloud</span>
+                    </label>
+                </div>
+                <div class="settings-row">
+                    <select class="language-select">
+                        <option value="en-US">English (US)</option>
+                        <option value="en-UK">English (UK)</option>
+                        <option value="es">Spanish</option>
+                        <option value="fr">French</option>
+                    </select>
+                    <select class="quality-select">
+                        <option value="high">High Quality</option>
+                        <option value="medium">Medium Quality</option>
+                        <option value="low">Low Quality</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="meeting-footer">
+                <button class="record-btn">
+                    <i class="fas fa-microphone"></i>
+                    <span>Start Recording</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

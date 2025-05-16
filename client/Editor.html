@@ -1,0 +1,102 @@
+<!-- This is a partial HTML file that will be integrated into the main index.html -->
+<div class="editor-container">
+    <!-- Version History Button -->
+    <div class="version-history">
+        <button id="versionBtn">
+            <i class="fas fa-history"></i> Version History
+            <i class="fas fa-caret-down"></i>
+        </button>
+        <div class="version-dropdown">
+            <div class="version-item">v3 - 3/24/25 (Current)</div>
+            <div class="version-item">v2 - 3/23/25</div>
+            <div class="version-item">v1 - 3/22/25</div>
+        </div>
+    </div>
+
+    <!-- Main Editor Area -->
+    <div class="editor-main">
+        <!-- Document Editor Tab -->
+        <div class="editor-content active" id="document-editor">
+            <div class="document-area" contenteditable="true">
+                <h1>Collaborative Document</h1>
+                <p>Start typing your document here...</p>
+            </div>
+        </div>
+
+        <!-- Code Editor Tab -->
+        <div class="editor-content" id="code-editor">
+            <div class="jupyter-notebook">
+                <div class="code-cell">
+                    <div class="cell-number">In [1]:</div>
+                    <pre class="code-area">
+import pandas as pd
+import numpy as np
+
+# Load and analyze data
+data = pd.read_csv('example.csv')
+print(data.head())</pre>
+                    <div class="output-area">
+                        Example DataFrame output...
+                    </div>
+                </div>
+                <div class="code-cell">
+                    <div class="cell-number">In [2]:</div>
+                    <pre class="code-area">
+# Create visualization
+plt.figure(figsize=(10,6))
+data.plot(kind='bar')
+plt.show()</pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- PDF Annotator Tab -->
+        <div class="editor-content" id="pdf-annotator">
+            <div class="pdf-container">
+                <div class="pdf-page">
+                    <h2>Sample PDF Content</h2>
+                    <p class="pdf-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <p class="pdf-text">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Drawing Canvas Tab -->
+        <div class="editor-content" id="drawing-canvas">
+            <canvas id="drawingBoard"></canvas>
+            <div class="drawing-tools">
+                <button id="clearCanvas">Clear Canvas</button>
+                <input type="color" id="colorPicker" value="#000000">
+                <input type="range" id="brushSize" min="1" max="20" value="2">
+            </div>
+        </div>
+    </div>
+
+    <!-- Comments Section -->
+    <div class="comments-section">
+        <h3>Comments</h3>
+        <div class="comments-list">
+            <!-- Comments will be dynamically loaded based on active tab -->
+        </div>
+        <div class="comment-input">
+            <textarea placeholder="Add a comment..."></textarea>
+            <button>Send</button>
+        </div>
+    </div>
+</div>
+
+<!-- Bottom Tabs -->
+<div class="editor-tabs">
+    <button class="tab-btn active" data-tab="document-editor">
+        <i class="fas fa-file-alt"></i> Document Editor
+    </button>
+    <button class="tab-btn" data-tab="code-editor">
+        <i class="fas fa-code"></i> Code Editor
+    </button>
+    <button class="tab-btn" data-tab="pdf-annotator">
+        <i class="fas fa-file-pdf"></i> PDF Annotator
+    </button>
+    <button class="tab-btn" data-tab="drawing-canvas">
+        <i class="fas fa-paint-brush"></i> Drawing Canvas
+    </button>
+</div>

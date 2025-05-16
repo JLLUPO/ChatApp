@@ -1,0 +1,45 @@
+<div class="feedback-container">
+    <div class="feedback-header">
+        <div class="header-title">
+            <i class="fas fa-star"></i>
+            <h2>Peer Feedback</h2>
+        </div>
+        <button class="close-feedback">×</button>
+    </div>
+
+    <div class="feedback-content">
+        <form id="feedback-form">
+            <div class="form-group">
+                <label for="member-select">Select Team Member</label>
+                <select id="member-select" required>
+                    <option value="" disabled selected>Choose a team member...</option>
+                    <option value="romy">Romy</option>
+                    <option value="scarlett">Scarlett</option>
+                    <option value="jay">Jay</option>
+                    <option value="amekav">Amekav</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Rating</label>
+                <div class="star-rating">
+                    <i class="far fa-star" data-rating="1"></i>
+                    <i class="far fa-star" data-rating="2"></i>
+                    <i class="far fa-star" data-rating="3"></i>
+                    <i class="far fa-star" data-rating="4"></i>
+                    <i class="far fa-star" data-rating="5"></i>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="feedback-text">Detailed Feedback</label>
+                <textarea id="feedback-text" placeholder="Share your thoughts about their contribution..." required></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">
+                <i class="fas fa-paper-plane"></i>
+                Submit Feedback
+            </button>
+        </form>
+    </div>
+</div>

@@ -1,17 +1,194 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Chat Room</title>
-  <link rel="stylesheet" href="index.css">
-  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/crypto-js.min.js"></script>
-  <script src="index.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Interface</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="Editor.css">
+    <link rel="stylesheet" href="Chat.css">
+    <link rel="stylesheet" href="Tasks.css">
+    <link rel="stylesheet" href="Files.css">
+    <link rel="stylesheet" href="Calendar.css">
+    <link rel="stylesheet" href="Ai_minutes.css">
+    <link rel="stylesheet" href="Bookmark.css">
+    <link rel="stylesheet" href="Group.css">
+    <link rel="stylesheet" href="Meeting.css">
+    <link rel="stylesheet" href="Feedback.css">
+    <link rel="stylesheet" href="Notification.css">
+    <link rel="stylesheet" href="QuestionBar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/crypto-js@4.1.1/crypto-js.min.js"></script>
+    <script src="index.js" defer></script>
 </head>
 <body>
-  <button id="logout-btn">Logout</button>
-  
-  <div class="chat-container">
+    <div class="question-bar">
+        <label for="taskInput">What task are you working on?</label>
+        <input type="text" id="taskInput" placeholder="e.g., Editing document, Working on code">
+        <button id="taskSubmit">Submit</button>
+    </div>
+    <div class="container">
+        <!-- Left Sidebar -->
+        <nav class="sidebar">
+            <button class="nav-btn" data-modal="files"><i class="fas fa-folder"></i><span>Files</span></button>
+            <button class="nav-btn" data-modal="tasks"><i class="fas fa-list"></i><span>Tasks</span></button>
+            <button class="nav-btn" data-modal="chat"><i class="fas fa-comment"></i><span>Chat</span></button>
+            <button class="nav-btn" data-modal="calendar"><i class="fas fa-calendar"></i><span>Calendar</span></button>
+            <button class="nav-btn" data-modal="feedback"><i class="fas fa-star"></i><span>Feedback</span></button>
+            <button class="nav-btn" data-modal="ai"><i class="fas fa-robot"></i><span>AI Assistant</span></button>
+            <button class="nav-btn" data-modal="bookmarks"><i class="fas fa-bookmark"></i><span>Bookmarks</span></button>
+            <button class="nav-btn" data-modal="group"><i class="fas fa-users"></i><span>Group Members</span></button>
+            <button class="nav-btn" data-modal="notifications"><i class="fas fa-bell"></i><span>Notifications</span></button>
+            <button class="nav-btn" data-modal="meeting"><i class="fas fa-video"></i><span>Meetings</span></button>
+            <button class="nav-btn logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i><span>Logout</span></button>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Include Editor.html content -->
+            <div class="editor-container">
+                <div class="version-history">
+                    <button id="versionBtn">
+                        <i class="fas fa-history"></i> Version History
+                        <i class="fas fa-caret-down"></i>
+                    </button>
+                    <div class="version-dropdown">
+                        <div class="version-item">v3 - 3/24/25 (Current)</div>
+                        <div class="version-item">v2 - 3/23/25</div>
+                        <div class="version-item">v1 - 3/22/25</div>
+                    </div>
+                </div>
+
+                <div class="editor-main">
+                    <div class="editor-content active" id="document-editor">
+                        <div class="document-area" contenteditable="true">
+                            <h1>Collaborative Document</h1>
+                            <p>Start typing your document here...</p>
+                        </div>
+                    </div>
+
+                    <div class="editor-content" id="code-editor">
+                        <div class="jupyter-notebook">
+                            <div class="code-cell">
+                                <div class="cell-number">In [1]:</div>
+                                <pre class="code-area">import pandas as pd
+import numpy as np
+
+# Load and analyze data
+data = pd.read_csv('example.csv')
+print(data.head())</pre>
+                                <div class="output-area">Example DataFrame output...</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="editor-content" id="pdf-annotator">
+                        <div class="pdf-container">
+                            <div class="pdf-page">
+                                <h2>Sample PDF Content</h2>
+                                <p class="pdf-text">Lorem ipsum dolor sit amet...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="editor-content" id="drawing-canvas">
+                        <canvas id="drawingBoard"></canvas>
+                        <div class="drawing-tools">
+                            <button id="clearCanvas">Clear Canvas</button>
+                            <input type="color" id="colorPicker" value="#000000">
+                            <input type="range" id="brushSize" min="1" max="20" value="2">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comments-section">
+                    <h3>Comments</h3>
+                    <div class="comments-list"></div>
+                    <div class="comment-input">
+                        <textarea placeholder="Add a comment..."></textarea>
+                        <button>Send</button>
+                    </div>
+                </div>
+
+                <div class="editor-tabs">
+                    <button class="tab-btn active" data-tab="document-editor">
+                        <i class="fas fa-file-alt"></i> Document Editor
+                    </button>
+                    <button class="tab-btn" data-tab="code-editor">
+                        <i class="fas fa-code"></i> Code Editor
+                    </button>
+                    <button class="tab-btn" data-tab="pdf-annotator">
+                        <i class="fas fa-file-pdf"></i> PDF Annotator
+                    </button>
+                    <button class="tab-btn" data-tab="drawing-canvas">
+                        <i class="fas fa-paint-brush"></i> Drawing Canvas
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Overlays -->
+    <div class="modal-overlay" id="modalOverlay">
+        <!-- Meeting Modal -->
+        <div class="modal" id="meetingModal">
+            <!-- Meeting content will be loaded here -->
+        </div>
+
+        <!-- Group Members Modal -->
+        <div class="modal" id="groupModal">
+            <!-- Group Members content will be loaded here -->
+        </div>
+
+        <!-- Bookmarks Modal -->
+        <div class="modal" id="bookmarksModal">
+            <!-- Bookmarks content will be loaded here -->
+        </div>
+
+        <!-- AI Assistant Modal -->
+        <div class="modal" id="aiModal">
+            <!-- AI Assistant content will be loaded here -->
+        </div>
+
+        <!-- Calendar Modal -->
+        <div class="modal" id="calendarModal">
+            <!-- Calendar content will be loaded here -->
+        </div>
+        
+        <!-- Files Modal -->
+        <div class="modal" id="filesModal">
+            <!-- Files content will be loaded here -->
+        </div>
+        
+        <!-- Tasks Modal -->
+        <div class="modal" id="tasksModal">
+            <!-- Tasks content will be loaded here -->
+        </div>
+
+        <!-- Feedback Modal -->
+        <div class="modal" id="feedbackModal">
+            <!-- Feedback content will be loaded here -->
+        </div>
+
+        <!-- Notifications Modal -->
+        <div class="modal" id="notificationsModal">
+            <div class="notification-popup">
+                <div class="notification-header">
+                    <h2><i class="fas fa-bell"></i> Notifications</h2>
+                    <button class="close-btn"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="notification-list">
+                    <!-- Notifications will be dynamically populated here -->
+                </div>
+                <button class="clear-all-btn">Clear All</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Container -->
+    <div class="chat-container">
     <div class="chat-header">
       <div>
         <select id="recipient-select">
@@ -24,8 +201,20 @@
       </ul>
     <div class="chat-input">
       <input type="text" id="chat-input" placeholder="Type your message...">
-      <button>Send</button>
+      <button><i class="fas fa-paper-plane"></i></button>
     </div>
   </div>
+
+    <!-- Scripts -->
+    <script src="editor.js"></script>
+    <script src="Tasks.js"></script>
+    <script src="Files.js"></script>
+    <script src="Calendar.js"></script>
+    <script src="Ai_minutes.js"></script>
+    <script src="Bookmark.js"></script>
+    <script src="Group.js"></script>
+    <script src="Meeting.js"></script>
+    <script src="Feedback.js"></script>
+    <script src="Notification.js"></script>
 </body>
 </html>
