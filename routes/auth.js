@@ -51,6 +51,7 @@ router.post('/login', async (req, res) => {
       { expiresIn: '2h' }
     );
 
+    // Key generated with "crypto.randomBytes(32).toString('hex'))"  (CSPRNG)
     res.json({ token, username: user.username, encryptionKey: process.env.MESSAGE_SECRET });
   } catch (err) {
     console.error(err);

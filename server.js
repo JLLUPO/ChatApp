@@ -10,7 +10,6 @@ const authRoutes = require('./routes/auth');
 const messageRoutes = require('./routes/messages');
 const Message = require('./models/Message');
 const CryptoJS = require('crypto-js');
-const SECRET = process.env.MESSAGE_SECRET;
 
 const app = express();
 const server = http.createServer(app); 
@@ -58,14 +57,12 @@ io.on('connection', async (socket) => {
       return;
     }
 
-    const decryptedText = decryptMessage(text); // Decrypt incoming
-
     try {
       console.log('Saving message:', { sender, recipient, text });
       const savedMessage = await Message.create({
         sender,
         recipient,
-        text: encryptMessage(decryptedText)
+        text
       });
 
     const recipientSocketId = onlineUsers[recipient];
@@ -91,13 +88,3 @@ io.on('connection', async (socket) => {
 // Start server
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
-
-function encryptMessage(text) {
-  return CryptoJS.AES.encrypt(text, SECRET).toString();
-}
-
-function decryptMessage(ciphertext) {
-  const bytes = CryptoJS.AES.decrypt(ciphertext, SECRET);
-  return bytes.toString(CryptoJS.enc.Utf8);
-}
